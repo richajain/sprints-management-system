@@ -1,0 +1,6 @@
+<% @project.each do |project| %>
+    <tr>
+      <td><%= project.title %></td>
+      <td><%= project.text %></td>
+    </tr>
+  <% end %>
