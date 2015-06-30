@@ -1,9 +1,7 @@
 class RemoveTableProjectEmployee < ActiveRecord::Migration
   def up
-     drop_table :Project_employees
-  end
-  
-  def down
-     raise ActiveRecord::IrreversibleMigration
+    if ActiveRecord::Base.connection.table_exists? 'Project_employees'
+      drop_table :Project_employees
+    end
   end
 end
