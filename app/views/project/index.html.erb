@@ -1,7 +1,9 @@
+<table>
 <% @project.each do |project| %>
     <tr>
+      <td><%= project.id %></td>
       <td><%= project.title %></td>
       <td><%= project.text %></td>
-      <td><%= project.id %></td>
     </tr>
   <% end %>
+</table>
