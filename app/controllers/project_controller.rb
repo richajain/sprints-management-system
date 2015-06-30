@@ -12,13 +12,10 @@ class ProjectController < ApplicationController
 	end
 
 	def create
-		@project = Project.new(params.require(:project).permit(:title, :text, :manager => @user.id, :user_id => @user.id))
-		if  @project.save
-		  redirect_to @project
-	  else
-      render 'new'
-    end
-  end
+		@project = Project.new(params.require(:project).permit(:title, :text))
+		@project.save
+		redirect_to project_index_path
+  	end
 
 
 end
