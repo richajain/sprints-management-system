@@ -12,18 +12,13 @@ class ProjectController < ApplicationController
 	end
 
 	def create
-		@project = Project.new(params.require(:project).permit(:title,:text))
-		@project.save
-		redirect_to @project
-	end
-
-  def create
-    @project = Project.create(title => params[:title], text => params[:text], )
-    if @project.save
-      redirect_to @project
-    else
+		@project = Project.new(params.require(:project).permit(:title, :text, :manager => @user.id, :user_id => @user.id))
+		if  @project.save
+		  redirect_to @project
+	  else
       render 'new'
     end
   end
+
 
 end
