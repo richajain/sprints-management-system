@@ -7,6 +7,14 @@
   <strong>Text:</strong>
   <%= @project.text %>
 </p>
+
+<h2>List of Tasks</h2>
+<% @project.tasks.each do |task| %>
+  <p>
+    <%= task.text %>
+  </p>
+<% end %>
+
 <h2>Add a Task:</h2>
 <%= form_for([@project, @project.tasks.build]) do |f| %>
   <p>
@@ -14,6 +22,27 @@
     <%= f.text_area :text %>
   </p>
   <p>
-    <%= f.submit %>
+  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}) %>
+  <%= select_tag "sprints", options_for_select(@options) %>
+  <%= f.submit %>
   </p>
 <% end %>
+
+<h3>Current Sprint <%= @project.current_sprint %> </h3>
+<table>
+	<% @tasks.each do |current_task| %>
+		<tr>
+		  <td><%= current_task.id %></td>
+		  <td><%= current_task.text %></td>
+		  <td><%= current_task.status %></td>
+		  <td><%= current_task.sprints %></td>
+		  <td><%= current_task.user_id %></td>	
+		</tr>
+	<% end %>
+</table>
+
+<%= form_for @project, :url => {:controller => "project", :action => "update"} do |f| %>
+	<%= f.submit "move to next sprint!"%>
+<% end %>
+
+
