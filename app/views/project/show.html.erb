@@ -22,6 +22,7 @@
     <%= f.text_area :text %>
   </p>
   <p>
+  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}) %>
     <%= f.submit %>
   </p>
 <% end %>
