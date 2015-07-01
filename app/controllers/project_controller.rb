@@ -9,8 +9,8 @@ class ProjectController < ApplicationController
 
 	def show
 		@project = Project.find(params[:id])
-    @user = User.all	
-  end
+		@user = User.all
+	end
 
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))
