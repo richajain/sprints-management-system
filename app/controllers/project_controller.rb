@@ -10,6 +10,7 @@ class ProjectController < ApplicationController
 	def show
 		@project = Project.find(params[:id])
 		@user = User.all
+		@options = (1..5)
 	end
 
 	def create

@@ -23,6 +23,7 @@
   </p>
   <p>
   <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}) %>
-    <%= f.submit %>
+  <%= select_tag "sprints", options_for_select(@options) %>
+  <%= f.submit %>
   </p>
 <% end %>
