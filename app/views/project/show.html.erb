@@ -7,6 +7,14 @@
   <strong>Text:</strong>
   <%= @project.text %>
 </p>
+
+<h2>List of Tasks</h2>
+<% @project.tasks.each do |task| %>
+  <p>
+    <%= task.text %>
+  </p>
+<% end %>
+
 <h2>Add a Task:</h2>
 <%= form_for([@project, @project.tasks.build]) do |f| %>
   <p>
