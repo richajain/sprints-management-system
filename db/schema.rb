@@ -58,18 +58,15 @@ ActiveRecord::Schema.define(version: 20150701104300) do
     t.string   "uid"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
   create_table "works", force: :cascade do |t|
     t.string   "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
-    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "users_id"
+    t.integer  "projects_id"
   end
 
-  add_index "works", ["project_id"], name: "index_works_on_project_id"
-  add_index "works", ["user_id"], name: "index_works_on_user_id"
+  add_index "works", ["projects_id"], name: "index_works_on_projects_id"
+  add_index "works", ["users_id"], name: "index_works_on_users_id"
 
 end
