@@ -27,3 +27,10 @@
   <%= f.submit %>
   </p>
 <% end %>
+
+<h3>Current Sprint <%= @project.current_sprint %> </h3>
+<table>
+	<% @tasks.each do |current_task| %>
+	  <tr><%= current_task.text %></tr><br>
+	<% end %>
+</table>
