@@ -11,6 +11,8 @@
 <h2>List of Tasks</h2>
 <% @project.tasks.each do |task| %>
   <p>
+    <%= task.id %>
+    <%= task.user_id %>
     <%= task.text %>
   </p>
 <% end %>
@@ -41,7 +43,7 @@
 	<% end %>
 </table>
 
-<%= form_for @project, :url => {:controller => "project", :action => "update"} do |f| %>
+<%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
 	<%= f.submit "move to next sprint!"%>
 <% end %>
 

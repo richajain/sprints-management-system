@@ -15,7 +15,8 @@ class ProjectController < ApplicationController
 		@options = (0..5)
 	end
 
-	def update
+	public
+	def next_sprint
 		@project = Project.find(params[:id])
 		@tasks = Task.where(project_id: params[:id], sprints: @project.current_sprint).where.not(status: 2)
 		@project.update(:current_sprint => @project.current_sprint+1)
