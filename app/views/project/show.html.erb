@@ -31,6 +31,18 @@
 <h3>Current Sprint <%= @project.current_sprint %> </h3>
 <table>
 	<% @tasks.each do |current_task| %>
-	  <tr><%= current_task.text %></tr><br>
+		<tr>
+		  <td><%= current_task.id %></td>
+		  <td><%= current_task.text %></td>
+		  <td><%= current_task.status %></td>
+		  <td><%= current_task.sprints %></td>
+		  <td><%= current_task.user_id %></td>	
+		</tr>
 	<% end %>
 </table>
+
+<%= form_for @project, :url => {:controller => "project", :action => "update"} do |f| %>
+	<%= f.submit "move to next sprint!"%>
+<% end %>
+
+
