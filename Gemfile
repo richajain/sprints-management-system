@@ -43,6 +43,6 @@ group :development, :test do
   gem 'spring'
   gem 'devise'
   gem 'omniauth'
-  gem 'omniauth-google-oauth2' 
+  gem 'omniauth-google-oauth2'
 end
 
