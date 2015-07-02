@@ -8,7 +8,6 @@ class ProjectController < ApplicationController
 	end
 
 	def show
-<<<<<<< HEAD
 		if current_user && current_user.id == Project.find(params[:id]).user_id
 			@project = Project.find(params[:id])
 			@user = User.all
