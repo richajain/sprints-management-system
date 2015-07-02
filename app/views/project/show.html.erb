@@ -1,21 +1,21 @@
-<p>
-<strong>Title:</strong>
-  <%= @project.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @project.text %>
-</p>
+<div class="center jumbotron">	
+  <h3><%= @project.title %></h3>
+  <h4><%= @project.text %></h4>
+</div>
 
-<h2>List of Tasks</h2>
-<% @project.tasks.each do |task| %>
-  <p>
-    <%= task.text %>
-  </p>
-<% end %>
+<h3>List of Tasks</h3>
+<table class="table table-bordered">
+	<th> Assigned to </th>
+	<th> Task</th>
+	<% @project.tasks.each do |task| %>
+	    <tr>
+	    <td><%= task.user_id %></td>
+	    <td><%= task.text %></td>
+	    </tr>
+	<% end %>
+</table>
 
-<h2>Add a Task:</h2>
+<h4>Add a Task:</h4>
 <%= form_for([@project, @project.tasks.build]) do |f| %>
   <p>
     <%= f.label :text %><br>
@@ -29,8 +29,21 @@
 <% end %>
 
 <h3>Current Sprint <%= @project.current_sprint %> </h3>
-<table>
+<table class="table table-bordered">
+	<th>Task</th>
+	<th>Status</th>
+	<th>User</th>
 	<% @tasks.each do |current_task| %>
-	  <tr><%= current_task.text %></tr><br>
+		<tr>
+		  <td><%= current_task.text %></td>
+		  <td><%= current_task.status %></td>
+		  <td><%= current_task.user_id %></td>	
+		</tr>
 	<% end %>
 </table>
+
+<%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
+	<%= f.submit "move to next sprint!"%>
+<% end %>
+
+

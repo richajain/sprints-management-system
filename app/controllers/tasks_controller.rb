@@ -4,11 +4,28 @@ class TasksController < ApplicationController
     	@task = @project.tasks.create(task_params)
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
+    	@task.status = 0
     	@task.save
-    	redirect_to project_index_path
+    	redirect_to @project
     end
+
     private
     def task_params
       params.require(:task).permit(:text)
     end
+
+    def edit
+        @tasks = Project.find(params[:project_id])
+        redirect_to 'show'
+    end
+
+    def update
+        @task = Task.find(params[:id])
+        if @task.update(params.require(:task).permit(:text))
+            redirect_to @task
+        else
+            render 'edit'
+        end
+    end
+
 end
