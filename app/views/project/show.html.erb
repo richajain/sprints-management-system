@@ -5,8 +5,8 @@
 
 <h3>List of Tasks</h3>
 <table class="table table-bordered">
+	<th> Task </th>
 	<th> Assigned to </th>
-	<th> Task</th>
 	<% @project.tasks.each do |task| %>
 	    <tr>
 	    <td><%= task.text %></td>
@@ -17,8 +17,8 @@
 
 <div class="container">
 	<h4>Add a Task:</h4>
-	<form role="form">
-	<%= form_for([@project, @project.tasks.build]) do |f| %>
+	<!-- <form role="form"> -->
+	<%= form_for @task, url: project_tasks_path(project_id: @project.id) do |f| %>
 	  <div class="form-group">
 	    <%= f.label :text %>
 	    <%= f.text_area :text, class: "form-control"%>
@@ -33,6 +33,6 @@
 	  </div>
 	  <%= f.submit class: "btn"%>
 	<% end %>
-	</form>
+	<!-- </form> -->
 </div>
 

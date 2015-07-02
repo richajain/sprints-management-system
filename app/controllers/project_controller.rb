@@ -12,6 +12,7 @@ class ProjectController < ApplicationController
 		@user = User.all
 		@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
 		@options = (0..20)
+		@task = Task.new
 	end
 
 	public
