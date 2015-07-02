@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :project do
       resources :tasks
     end
+    resources :users
 
     
   # Example resource route with options:

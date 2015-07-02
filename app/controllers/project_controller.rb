@@ -11,7 +11,11 @@ class ProjectController < ApplicationController
 		@project = Project.find(params[:id])
 		@user = User.all
 		@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
+<<<<<<< HEAD
 		@options = (0..20)
+=======
+		@options = (0..5)
+>>>>>>> 10872dffb2cb00aad2d9386ec99161c6bfb8b5ca
 	end
 
 	public

@@ -23,9 +23,15 @@ class TasksController < ApplicationController
     	@task = @project.tasks.create(task_params)
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
+<<<<<<< HEAD
     	#render plain: @task.inspect
         @task.save
         redirect_to @project
+=======
+    	@task.status = 0
+    	@task.save
+    	redirect_to @project
+>>>>>>> 10872dffb2cb00aad2d9386ec99161c6bfb8b5ca
     end
 
     def update
