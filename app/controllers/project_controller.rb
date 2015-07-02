@@ -12,6 +12,7 @@ class ProjectController < ApplicationController
 		@user = User.all
 		@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
 		@options = (@project.current_sprint..@project.current_sprint+20)
+		@task = Task.new
 	end
 
 	public
@@ -30,8 +31,10 @@ class ProjectController < ApplicationController
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))
 		@project.current_sprint = 0
+		@project.user_id = current_user.id
+		#@project.manager = current_user.id
 		@project.save
-		redirect_to project_index_path
+		redirect_to project_path(@project.id)
   	end
 
 

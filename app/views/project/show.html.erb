@@ -1,12 +1,12 @@
 <div class="center jumbotron">	
-  <h3><%= @project.title %></h3>
-  <h4><%= @project.text %></h4>
+  <h2>Project Title: <%= @project.title %></h2>
+  <h4>Project Description:<%= @project.text %></h4>
 </div>
 
 <h3>List of Tasks</h3>
 <table class="table table-bordered">
+	<th> Task </th>
 	<th> Assigned to </th>
-	<th> Task</th>
 	<% @project.tasks.each do |task| %>
 	    <tr>
 	    <td><%= task.user.name %></td>
@@ -15,47 +15,24 @@
 	<% end %>
 </table>
 
-<h4>Add a Task:</h4>
-<%= form_for([@project, @project.tasks.build]) do |f| %>
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-  <p>
-  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}) %>
-  <%= select_tag "sprints", options_for_select(@options) %>
-  <%= f.submit %>
-  </p>
-<% end %>
-
-  <h3>Current Sprint <%= @project.current_sprint %> </h3>
-  <table class="table table-bordered">
-  	<% @tasks.each do |current_task| %>
-  		<tr>
-  		  <td><%= current_task.id %></td>
-  		  <td><%= current_task.text %></td>
-  		  <td>
-          <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
-            <%= f.radio_button :status, 0, :checked => (current_task.status == 0) %> 
-            <%= label :status, "N" %> 
-            <%= f.radio_button :status, 1, :checked => (current_task.status == 1) %>            
-            <%= f.label :status, "P"  %>
-            <%= f.radio_button :status, 2, :checked => (current_task.status == 2) %>
-            <%= f.label :status, "F"  %>
-            
-            <%= f.submit %>
-          <% end %>
-        </td>
-  		  <td><%= current_task.sprints %></td>
-  		  <td><%= current_task.user.name %></td>
-        <td>
-        </td>
-  		</tr>
-  	<% end %>
-  </table>
-
-<%= form_for @project, :url => {:controller => "project", :action => "update"} do |f| %>
-	<%= f.submit "Change Sprint!"%>
-<% end %>
-
+<div class="container">
+	<h4>Add a Task:</h4>
+	<!-- <form role="form"> -->
+	<%= form_for @task, url: project_tasks_path(project_id: @project.id) do |f| %>
+	  <div class="form-group">
+	    <%= f.label :text %>
+	    <%= f.text_area :text, class: "form-control"%>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Developer %>
+	  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}, {class: "form-control"}) %>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Sprint %>
+	  <%= select_tag "sprints", options_for_select(@options), class: "form-control" %>
+	  </div>
+	  <%= f.submit class: "btn"%>
+	<% end %>
+	<!-- </form> -->
+</div>
 
