@@ -16,6 +16,7 @@ Rails.application.routes.draw do
    post '/project/next_sprint' => 'project#next_sprint'
   # Example resource route (maps HTTP verbs to controller actions automatically):
     resources :project do
+      resources :sprint
       resources :tasks
     end
     resources :users

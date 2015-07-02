@@ -36,34 +36,3 @@
 	</form>
 </div>
 
-  <h3>Current Sprint <%= @project.current_sprint %> </h3>
-  <table class="table table-bordered">
-  	<% @tasks.each do |current_task| %>
-  		<tr>
-  		  <td><%= current_task.id %></td>
-  		  <td><%= current_task.text %></td>
-  		  <td>
-          <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
-            <%= f.radio_button :status, 0, :checked => (current_task.status == 0) %> 
-            <%= label :status, "N" %> 
-            <%= f.radio_button :status, 1, :checked => (current_task.status == 1) %>            
-            <%= f.label :status, "P"  %>
-            <%= f.radio_button :status, 2, :checked => (current_task.status == 2) %>
-            <%= f.label :status, "F"  %>
-            
-            <%= f.submit %>
-          <% end %>
-        </td>
-  		  <td><%= current_task.sprints %></td>
-  		  <td><%= current_task.user_id %></td>
-        <td>
-        </td>
-  		</tr>
-  	<% end %>
-  </table>
-
-<%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
-	<%= f.submit "move to next sprint!"%>
-<% end %>
-
-
