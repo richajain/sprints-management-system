@@ -3,6 +3,7 @@
   <h4>Project Description:<%= @project.text %></h4>
 </div>
 
+<% if @project.tasks.count != 0 %>
 <h3>List of Tasks</h3>
 <table class="table table-bordered">
 	<th> Task </th>
@@ -14,6 +15,7 @@
 	    </tr>
 	<% end %>
 </table>
+<% end %>
 
 <div class="container">
 	<h4>Add a Task:</h4>

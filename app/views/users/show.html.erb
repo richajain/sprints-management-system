@@ -1,6 +1,14 @@
 <h1>Hello User <%= current_user.id %></h1>
-<h2>Your Projects :</h2>
+
 <% @count = 1 %>
+
+<% if @projectlist.count == 0 %>
+<h3>You have not added any projects!</h3>
+<%= link_to "Add New?", new_project_path %>
+
+<% else %>
+
+<h2>Your Projects :</h2>
 <table>
 <% @projectlist.each do |p| %>
     <tr>
@@ -13,7 +21,10 @@
     <% @count+= 1 %>
   <% end %>
 </table>
+<%= link_to "Create A new Project", new_project_path %>
+<% end %>
 
+<% if @tasklist.count != 0 %>
 <% @count = 1 %>
 <h2>Your Tasks :</h2>
 <table>
@@ -34,9 +45,9 @@
         <% end %>
       </td>
       <td><%= t.sprints %></td>
-      <% if t.status = 0 %>
+      <% if t.status == 0 %>
       <td>Not Started</td>
-      <% elsif t.status = 1 %>
+      <% elsif t.status == 1 %>
       <td>Going On</td>
       <% else %>
       <td>Completed</td>
@@ -45,6 +56,5 @@
     <% @count+= 1 %>
   <% end %>
 </table>
-
-<%= link_to "Create A new Project", new_project_path %>
+<% end %>
 <p></p>
