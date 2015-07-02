@@ -36,9 +36,6 @@
   		  <td><%= current_task.text %></td>
   		  <td>
           <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
-            <p>
-            <%= current_task.status %>
-            </p>
             <%= f.radio_button :status, 0, :checked => (current_task.status == 0) %> 
             <%= label :status, "N" %> 
             <%= f.radio_button :status, 1, :checked => (current_task.status == 1) %>            
