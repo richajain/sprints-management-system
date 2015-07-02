@@ -32,8 +32,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.status = params[:task][:status]
         @task.save
-        render plain: @task.inspect
-        #redirect_to project_path(@task.project_id)
+        redirect_to project_path(@task.project_id)
     end
     private
     def task_params
