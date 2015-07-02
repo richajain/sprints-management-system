@@ -28,6 +28,8 @@ class ProjectController < ApplicationController
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))
 		@project.current_sprint = 0
+		@project.user_id = current_user
+		@project.manager = current_user
 		@project.save
 		redirect_to project_index_path
   	end
