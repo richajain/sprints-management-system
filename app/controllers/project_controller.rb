@@ -8,11 +8,13 @@ class ProjectController < ApplicationController
 	end
 
 	def show
+<<<<<<< HEAD
 		if current_user && current_user.id == Project.find(params[:id]).user_id
 			@project = Project.find(params[:id])
 			@user = User.all
 			@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
 			@options = (0..20)
+			@task = Task.new
 		elsif current_user && current_user.id != Project.find(params[:id]).user_id
 			redirect_to user_path(current_user.id)
 		else

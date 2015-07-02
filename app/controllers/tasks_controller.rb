@@ -19,11 +19,13 @@ class TasksController < ApplicationController
     end
 
     def create
-		@project = Project.find(params[:project_id])       
+		@project = Project.find(params[:project_id])
+		#render plain: project.inspect       
     	@task = @project.tasks.create(task_params)
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
     	@task.status = 0
+    	#render plain: task.inspect
     	@task.save
     	redirect_to @project
     end
