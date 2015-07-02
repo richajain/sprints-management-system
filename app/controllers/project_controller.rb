@@ -11,7 +11,6 @@ class ProjectController < ApplicationController
 		@project = Project.find(params[:id])
 		@user = User.all
 		@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
-
 		@options = (0..5)
 	end
 

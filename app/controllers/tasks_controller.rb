@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
     	@task.save
-    	redirect_to project_index_path
+    	redirect_to @project
     end
     private
     def task_params
