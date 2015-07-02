@@ -1,15 +1,10 @@
-<p>
-<strong>Title:</strong>
-  <%= @project.title %>
-</p>
- 
-<p>
-  <strong>Text:</strong>
-  <%= @project.text %>
-</p>
+<div class="center jumbotron">	
+  <h3><%= @project.title %></h3>
+  <h4><%= @project.text %></h4>
+</div>
 
 <h3>List of Tasks</h3>
-<table>
+<table class="table table-bordered">
 	<th> Assigned to </th>
 	<th> Task</th>
 	<% @project.tasks.each do |task| %>
@@ -34,7 +29,7 @@
 <% end %>
 
 <h3>Current Sprint <%= @project.current_sprint %> </h3>
-<table>
+<table class="table table-bordered">
 	<th>Task</th>
 	<th>Status</th>
 	<th>User</th>
