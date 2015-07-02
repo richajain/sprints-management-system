@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+  <p>
+<strong>Title:</strong>
+  <%= @project.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @project.text %>
+</p>
+
+<h2>List of Tasks</h2>
+<table>
+    <tr>
+        <td><u>Task id</u></td>
+        <td><u>Developer</u></td>
+        <td><u>Task</u></td>
+    </tr>
+  <% @project.tasks.each do |task| %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.text %></td>
+    </tr>
+  <% end %>
+=======
 <div class="center jumbotron">	
   <h3><%= @project.title %></h3>
   <h4><%= @project.text %></h4>
@@ -13,6 +38,7 @@
 	    <td><%= task.text %></td>
 	    </tr>
 	<% end %>
+>>>>>>> 10872dffb2cb00aad2d9386ec99161c6bfb8b5ca
 </table>
 
 <h4>Add a Task:</h4>
@@ -28,6 +54,34 @@
   </p>
 <% end %>
 
+<<<<<<< HEAD
+  <h3>Current Sprint <%= @project.current_sprint %> </h3>
+  <table>
+  	<% @tasks.each do |current_task| %>
+  		<tr>
+  		  <td><%= current_task.id %></td>
+  		  <td><%= current_task.text %></td>
+  		  <td>
+          <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
+            
+            <%= f.radio_button :status, 0, :checked => (current_task.status == 0) %> 
+            <%= label :status, "N" %> 
+            <%= f.radio_button :status, 1, :checked => (current_task.status == 1) %>            
+            <%= f.label :status, "P"  %>
+            <%= f.radio_button :status, 2, :checked => (current_task.status == 2) %>
+            <%= f.label :status, "F"  %>
+            
+            <%= f.submit %>
+          <% end %>
+        </td>
+  		  <td><%= current_task.sprints %></td>
+  		  <td><%= current_task.user_id %></td>
+        <td>
+        </td>
+  		</tr>
+  	<% end %>
+  </table>
+=======
 <h3>Current Sprint <%= @project.current_sprint %> </h3>
 <table class="table table-bordered">
 	<th>Task</th>
@@ -41,6 +95,7 @@
 		</tr>
 	<% end %>
 </table>
+>>>>>>> 10872dffb2cb00aad2d9386ec99161c6bfb8b5ca
 
 <%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
 	<%= f.submit "move to next sprint!"%>
