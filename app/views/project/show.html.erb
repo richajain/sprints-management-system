@@ -9,7 +9,7 @@
 	<th> Task</th>
 	<% @project.tasks.each do |task| %>
 	    <tr>
-	    <td><%= task.user_id %></td>
+	    <td><%= task.user.name %></td>
 	    <td><%= task.text %></td>
 	    </tr>
 	<% end %>
@@ -47,15 +47,15 @@
           <% end %>
         </td>
   		  <td><%= current_task.sprints %></td>
-  		  <td><%= current_task.user_id %></td>
+  		  <td><%= current_task.user.name %></td>
         <td>
         </td>
   		</tr>
   	<% end %>
   </table>
 
-<%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
-	<%= f.submit "move to next sprint!"%>
+<%= form_for @project, :url => {:controller => "project", :action => "update"} do |f| %>
+	<%= f.submit "Change Sprint!"%>
 <% end %>
 
 
