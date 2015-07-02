@@ -1,17 +1,14 @@
-<h1>Hello User-2</h1>
+<h1>Hello User <%= current_user.id %></h1>
 <h2>Your Projects :</h2>
 <% @count = 1 %>
 <table>
-  <tr>
-    <th>  </th>
-    <th>Title</th>
-    <th>Details</th>
-  </tr>
 <% @projectlist.each do |p| %>
     <tr>
       <td>(<%= @count %>) </td>
-      <td><%= p.title %></td>
-      <td><%= p.text %></td>
+      <td><%= link_to project_path(p.id) do %>
+        <%= p.title %>
+        <% end %>
+      </td>
     </tr>
     <% @count+= 1 %>
   <% end %>
@@ -26,13 +23,16 @@
     <th>Project</th>
     <th>Sprint</th>
     <th>Status</th>
+    <th colspan="2"></th>
   </tr>
 <% @tasklist.each do |t| %>
     <tr>
       <td>(<%= @count %>) </td>
       <td><%= t.text %></td>
-      <% temp = Project.find(t.project_id) %>
-      <td><%= temp.title %></td>
+      <td><%= link_to project_path(t.project_id) do %>
+        <%= Project.find(t.project_id).title %>
+        <% end %>
+      </td>
       <td><%= t.sprints %></td>
       <% if t.status = 0 %>
       <td>Not Started</td>
