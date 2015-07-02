@@ -1,6 +1,6 @@
 <div class="center jumbotron">	
-  <h3><%= @project.title %></h3>
-  <h4><%= @project.text %></h4>
+  <h2>Project Title: <%= @project.title %></h2>
+  <h4>Project Description:<%= @project.text %></h4>
 </div>
 
 <h3>List of Tasks</h3>
@@ -15,18 +15,26 @@
 	<% end %>
 </table>
 
-<h4>Add a Task:</h4>
-<%= form_for([@project, @project.tasks.build]) do |f| %>
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
-  </p>
-  <p>
-  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}) %>
-  <%= select_tag "sprints", options_for_select(@options) %>
-  <%= f.submit %>
-  </p>
-<% end %>
+<div class="container">
+	<h4>Add a Task:</h4>
+	<form role="form">
+	<%= form_for([@project, @project.tasks.build]) do |f| %>
+	  <div class="form-group">
+	    <%= f.label :text %>
+	    <%= f.text_area :text, class: "form-control"%>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Developer %>
+	  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}, {class: "form-control"}) %>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Sprint %>
+	  <%= select_tag "sprints", options_for_select(@options), class: "form-control" %>
+	  </div>
+	  <%= f.submit class: "btn"%>
+	<% end %>
+	</form>
+</div>
 
   <h3>Current Sprint <%= @project.current_sprint %> </h3>
   <table class="table table-bordered">
