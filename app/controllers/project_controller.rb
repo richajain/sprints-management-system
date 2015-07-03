@@ -21,8 +21,6 @@ class ProjectController < ApplicationController
 		end
 	end
 
-	
-
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))
 		@project.current_sprint = 0

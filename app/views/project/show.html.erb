@@ -1,45 +1,33 @@
-<div class="center jumbotron">	
-  <h2>Project Title: <%= @project.title %></h2>
-  <h4>Project Description:<%= @project.text %></h4>
-</div>
-
-<% if @project.tasks.count != 0 %>
-<h3>List of Tasks</h3>
-<table class="table table-bordered">
-	<th> Task </th>
-	<th> Assigned to </th>
-	<% @project.tasks.each do |task| %>
-	    <tr>
-	    <td><%= task.user.name %></td>
-	    <td><%= task.text %></td>
-	    </tr>
-	<% end %>
-</table>
-<% end %>
-
-<div class="btn-group">
-  <button type="button" class="btn btn-default"><%= link_to "Back to Homepage", user_path %></button>
-</div>
-
 <div class="container">
-	<h4>Add a Task:</h4>
-	<!-- <form role="form"> -->
-	<%= form_for @task, url: project_tasks_path(project_id: @project.id) do |f| %>
-	  <div class="form-group">
-	    <%= f.label :text %>
-	    <%= f.text_area :text, class: "form-control"%>
-	  </div>
-	  <div class="form-group">
-	  <%= f.label :Developer %>
-	  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}, {class: "form-control"}) %>
-	  </div>
-	  <div class="form-group">
-	  <%= f.label :Sprint %>
-	  <%= select_tag "sprints", options_for_select(@options), class: "form-control" %>
-	  </div>
-	  <%= f.submit class: "btn"%>
-	<% end %>
-	<!-- </form> -->
+<div class="jumbotron">
+   <div class="container">
+      		<h2><%= @project.title %></h2>
+			<h4><%= @project.text %></h4>
+    </div>
+  </div>
+	<div class="row">
+	       <div class="col-mid-4">
+	            <ul class="nav nav-pills nav-stacked">
+		            <li><%= link_to 'Home', project_path %></li>
+		            <li><%= link_to 'Profile', user_path %></li>
+		            <li><%= link_to 'Add new task', new_project_task_path(:project_id => @project.id) %></li>
+		            <li><%= link_to 'Sprint', project_sprint_index_path(:project_id => @project.id) %></li>
+	            </ul>
+       		</div>
+       <div class="col-mid-8">
+			  <% if @project.tasks.count != 0 %>
+				<h3>List of Tasks</h3>
+				<table class="table table-bordered">
+					<th> Task </th>
+					<th> Assigned to </th>
+					<% @project.tasks.each do |task| %>
+					    <tr>
+					    <td><%= task.text %></td>
+					    <td><%= task.user.name %></td>
+					    </tr>
+					<% end %>
+				</table>
+				<% end %>
+       </div>
+    </div>
 </div>
-
-<p></p>

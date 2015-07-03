@@ -1,0 +1,20 @@
+<div class="container">
+	<h4>Add a Task:</h4>
+	<!-- <form role="form"> -->
+	<%= form_for @task, url: project_tasks_path(project_id: @project.id) do |f| %>
+	  <div class="form-group">
+	    <%= f.label :text %>
+	    <%= f.text_area :text, class: "form-control"%>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Developer %>
+	  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}, {class: "form-control"}) %>
+	  </div>
+	  <div class="form-group">
+	  <%= f.label :Sprint %>
+	  <%= select_tag "sprints", options_for_select(@options), class: "form-control" %>
+	  </div>
+	  <%= f.submit class: "btn"%>
+	<% end %>
+	<!-- </form> -->
+</div>

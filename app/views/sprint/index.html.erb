@@ -1,8 +1,13 @@
 <h3>Current Sprint <%= @project.current_sprint %> </h3>
   <table class="table table-bordered">
+      <th>Task Id</th>
+      <th>Task</th>
+      <th>Status</th>
+      <th>Developer</th>
+
   	<% @tasks.each do |current_task| %>
-  		<tr>
-  		  <td><%= current_task.id %></td>
+      <tr>
+        <td><%= current_task.id %></td>
   		  <td><%= current_task.text %></td>
   		  <td>
           <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
@@ -16,8 +21,7 @@
             <%= f.submit %>
           <% end %>
         </td>
-  		  <td><%= current_task.sprints %></td>
-  		  <td><%= current_task.user_id %></td>
+  		  <td><%= current_task.user.name %></td>
         <td>
         </td>
   		</tr>

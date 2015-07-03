@@ -9,7 +9,16 @@ class TasksController < ApplicationController
     end
      
     def new
-        @task = Task.new
+    	if current_user && current_user.id == Project.find(params[:project_id]).user_id
+	        @task = Task.new
+	        @project = Project.find(params[:project_id])
+	        @user = User.all
+	        @options = (@project.current_sprint..@project.current_sprint+20)
+	    elsif current_user && current_user.id != Project.find(params[:project_id]).user_id
+			redirect_to user_path(current_user.id)
+		else
+			redirect_to new_user_session_path, notice: 'You are not logged in.'	
+		end
     end
 
     def edit
