@@ -1,10 +1,19 @@
-<h1>Hello User <%= current_user.id %></h1>
+<div class="jumbotron">
+   <div class="container">
+      <h1 align = 'center'; style ="color:#8B008B">Welcome <%= current_user.name %></h1>
+    </div>
+  </div>
+
+
 
 <% @count = 1 %>
 
 <% if @projectlist.count == 0 %>
-<h3>You have not added any projects!</h3>
-<%= link_to "Add New?", new_project_path %>
+<h3 align='center' style="font-family:courier">You have not added any projects!</h3>
+
+<div class="btn-group">
+  <button type="button" class="btn btn-default"><%= link_to "Add New", new_project_path %></button>
+</div>
 
 <% else %>
 
