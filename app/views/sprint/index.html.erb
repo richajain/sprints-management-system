@@ -24,6 +24,6 @@
   	<% end %>
   </table>
 
-<%= form_for @project, :url => {:controller => "project", :action => "next_sprint"} do |f| %>
+<%= form_for @project, url: project_sprint_index_path(project_id: @project.id), method: :post do |f| %>
 	<%= f.submit "move to next sprint!"%>
 <% end %>

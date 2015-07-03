@@ -21,18 +21,7 @@ class ProjectController < ApplicationController
 		end
 	end
 
-	public
-	def update
-		@project = Project.find(params[:id])
-		@tasks = Task.where(project_id: params[:id], sprints: @project.current_sprint).where.not(status: 2)
-		@project.current_sprint = @project.current_sprint+1
-		@project.save
-		@tasks.each do |t|
-			t.sprints = t.sprints + 1
-			t.save
-		end
-		redirect_to project_path
-	end
+	
 
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))
