@@ -1,68 +1,58 @@
 <div class="jumbotron">
    <div class="container">
-      <h1 align = 'center'; style ="color:#8B008B">Welcome <%= current_user.name %></h1>
+      <h1 align = 'center'; style ="color:#8B008B; font-family:Lucida Console">Welcome <%= current_user.name %></h1>
     </div>
   </div>
-
-
-
-<% @count = 1 %>
 
 <% if @projectlist.count == 0 %>
 <h3 align='center' style="font-family:courier">You have not added any projects!</h3>
 
-<div class="btn-group">
-  <button type="button" class="btn btn-default"><%= link_to "Add New", new_project_path %></button>
-</div>
-
 <% else %>
 
-<h2>Your Projects :</h2>
-<table>
+<h3 align='center' style="font-family:verdana">Projects you have Added:</h3>
+<table align='center'>
 <% @projectlist.each do |p| %>
     <tr>
-      <td>(<%= @count %>) </td>
       <td><%= link_to project_path(p.id) do %>
         <%= p.title %>
         <% end %>
       </td>
     </tr>
-    <% @count+= 1 %>
   <% end %>
 </table>
-<%= link_to "Create A new Project", new_project_path %>
 <% end %>
-
+<p></p>
+<div class="span7 text-center">
+<div class="btn-group">
+  <button type="button" class="btn btn-default"><%= link_to "Add New Project", new_project_path %></button>
+</div>
+</div>
+<p></p>
 <% if @tasklist.count != 0 %>
-<% @count = 1 %>
-<h2>Your Tasks :</h2>
-<table>
+<h3 align='center' style="font-family:verdana">Tasks You Have to Do :</h3>
+<table align='center'>
   <tr>
-    <th>  </th>
-    <th>Task</th>
-    <th>Project</th>
-    <th>Sprint</th>
-    <th>Status</th>
-    <th colspan="2"></th>
+    <th style="padding-right: 10px; padding-left: 10px">Task</th>
+    <th style="padding-right: 10px; padding-left: 10px">Project Name</th>
+    <th style="padding-right: 10px; padding-left: 10px">Sprint Assigned</th>
+    <th style="padding-right: 10px; padding-left: 10px">Current Status</th>
   </tr>
 <% @tasklist.each do |t| %>
     <tr>
-      <td>(<%= @count %>) </td>
-      <td><%= t.text %></td>
-      <td><%= link_to project_path(t.project_id) do %>
+      <td align='center'><%= t.text %></td>
+      <td align='center'><%= link_to project_path(t.project_id) do %>
         <%= Project.find(t.project_id).title %>
         <% end %>
       </td>
-      <td><%= t.sprints %></td>
+      <td align='center'><%= t.sprints %></td>
       <% if t.status == 0 %>
-      <td>Not Started</td>
+      <td align='center'>Not Started</td>
       <% elsif t.status == 1 %>
-      <td>Going On</td>
+      <td align='center'>Going On</td>
       <% else %>
-      <td>Completed</td>
+      <td align='center'>Completed</td>
       <% end %>
     </tr>
-    <% @count+= 1 %>
   <% end %>
 </table>
 <% end %>
