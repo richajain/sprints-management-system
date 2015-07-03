@@ -8,11 +8,11 @@ class ProjectController < ApplicationController
 	end
 
 	def show
-		if current_user && current_user.id == Project.find(params[:id]).user_id
+    if current_user && current_user.id == Project.find(params[:id]).user_id
 			@project = Project.find(params[:id])
 			@user = User.all
 			@tasks = Task.where(sprints: @project.current_sprint, project_id: params[:id])
-			@options = (0..20)
+			@options = (@project.current_sprint..@project.current_sprint+20)
 			@task = Task.new
 		elsif current_user && current_user.id != Project.find(params[:id]).user_id
 			redirect_to user_path(current_user.id)
@@ -21,16 +21,7 @@ class ProjectController < ApplicationController
 		end
 	end
 
-	public
-	def next_sprint
-		@project = Project.find(params[:id])
-		@tasks = Task.where(project_id: params[:id], sprints: @project.current_sprint).where.not(status: 2)
-		@project.update(:current_sprint => @project.current_sprint+1)
-		@tasks.each do |t|
-			t.sprints = t.sprints + 1
-		end
-		redirect_to project_path
-	end
+	
 
 	def create
 		@project = Project.new(params.require(:project).permit(:title, :text))

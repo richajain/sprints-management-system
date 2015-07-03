@@ -10,8 +10,8 @@
 	<th> Assigned to </th>
 	<% @project.tasks.each do |task| %>
 	    <tr>
+	    <td><%= task.user.name %></td>
 	    <td><%= task.text %></td>
-      <td><%= User.find(task.user_id).name %></td>
 	    </tr>
 	<% end %>
 </table>
