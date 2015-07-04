@@ -24,6 +24,7 @@ class TasksController < ApplicationController
     	@task = @project.tasks.create(task_params)
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
+        @task.start_sprint = params[:sprints]
     	@task.status = 0
     	#render plain: task.inspect
     	@task.save
