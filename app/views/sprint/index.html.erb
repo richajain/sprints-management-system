@@ -1,8 +1,31 @@
-<h3>Current Sprint <%= @project.current_sprint %> </h3>
-  <table class="table table-bordered">
+<div class="jumbotron">
+   <div class="container">
+          <h2><%= @project.title %></h2>
+      <h4><%= @project.text %></h4>
+    </div>
+  </div>
+
+<div class="row">
+         <div class="col-lg-2">
+              <ul class="nav nav-pills nav-stacked">
+                <li><%= link_to 'Home', project_path(:id => @project.id) %></li>
+                <li><%= link_to 'Profile', user_path(:id => @project.user_id) %></li>
+                <li><%= link_to 'Add new task', new_project_task_path(:project_id => @project.id) %></li>
+                <li><%= link_to 'Sprint', project_sprint_index_path(:project_id => @project.id) %></li>
+                <li><%= link_to 'Last Sprint', project_sprint_path(:project_id => @project.id, :id => @project.id), method: :get %></li>
+              </ul>
+          </div>
+
+<div class="col-md-8">
+  <h3>Current Sprint <%= @project.current_sprint %> </h3>
+    <table class="table table-bordered">
+        <th>Task Id</th>
+        <th>Task</th>
+        <th>Status</th>
+        <th>Developer</th>
   	<% @tasks.each do |current_task| %>
-  		<tr>
-  		  <td><%= current_task.id %></td>
+      <tr>
+        <td><%= current_task.id %></td>
   		  <td><%= current_task.text %></td>
   		  <td>
           <%= form_for current_task, url: project_task_path(project_id: @project.id, id: current_task.id), method: :put do |f| %>
@@ -15,8 +38,7 @@
             <%= f.submit %>
           <% end %>
         </td>
-  		  <td><%= current_task.sprints %></td>
-  		  <td><%= current_task.user_id %></td>
+  		  <td><%= current_task.user.name %></td>
         <td>
         </td>
   		</tr>
@@ -26,3 +48,5 @@
 <%= form_for @project, url: project_sprint_index_path(project_id: @project.id), method: :post do |f| %>
 	<%= f.submit "move to next sprint!"%>
 <% end %>
+</div>
+</div>

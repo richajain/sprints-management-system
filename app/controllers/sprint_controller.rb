@@ -12,6 +12,21 @@ class SprintController < ApplicationController
 		end
 	end
 
+	def show
+        @project = Project.find(params[:project_id])
+        #render plain: @project.inspect
+        @prev_task = Task.where(:project_id => params[:project_id]).where('(start_sprint= ?) OR 
+        	(start_sprint < ? and sprints >= ?)',
+         @project.current_sprint-1,@project.current_sprint-1,@project.current_sprint-1)
+        @prev_comp = Task.where(:project_id => params[:project_id]).where('(start_sprint= ?) OR 
+        	(start_sprint < ? and sprints = ?)',
+         @project.current_sprint-1,@project.current_sprint-1,@project.current_sprint-1)
+        @prev_incomp = Task.where(:project_id => params[:project_id]).where('(start_sprint= ?) OR 
+        	(start_sprint < ? and sprints > ?)',
+         @project.current_sprint-1,@project.current_sprint-1,@project.current_sprint-1)
+    end
+
+
 	public
 	def create
 		@project = Project.find(params[:project_id])

@@ -6,10 +6,27 @@ class TasksController < ApplicationController
 
     def show
         @task = Task.find(params[:id])
+        @project = Project.find(params[:project_id])
+        render plain: @project.inspect
+        #@prev_task = Task.where(:project_id => params[:project_id]).where("start_sprint == @project.current_sprint-1 
+        #    or (start_sprint < @project.current_spreint-1 and sprints >= @project.current_sprint-1)")
+        #@prev_comp = Task.where(:project_id => params[:project_id]).where("start_sprint == @project.current_sprint-1 
+        #    or (start_sprint < @project.current_spreint-1 and sprints == @project.current_sprint-1)")
+        #@prev_incomp = Task.where(:project_id => params[:project_id]).where("start_sprint == @project.current_sprint-1 
+        #    or (start_sprint < @project.current_spreint-1 and sprints > @project.current_sprint-1)")
     end
      
     def new
-        @task = Task.new
+    	if current_user && current_user.id == Project.find(params[:project_id]).user_id
+	        @task = Task.new
+	        @project = Project.find(params[:project_id])
+	        @user = User.all
+	        @options = (@project.current_sprint..@project.current_sprint+20)
+	    elsif current_user && current_user.id != Project.find(params[:project_id]).user_id
+			redirect_to user_path(current_user.id)
+		else
+			redirect_to new_user_session_path, notice: 'You are not logged in.'	
+		end
     end
 
     def edit
@@ -25,6 +42,7 @@ class TasksController < ApplicationController
     	@task.user_id = params[:user][:name]
     	@task.sprints = params[:sprints]
         @task.start_sprint = params[:sprints]
+        @task.points = params[:task][:points]
     	@task.status = 0
     	#render plain: task.inspect
     	@task.save
@@ -35,7 +53,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.status = params[:task][:status]
         @task.save
-        redirect_to project_path(@task.project_id)
+        redirect_to project_sprint_index_path(:project_id => @task.project_id)
     end
     private
     def task_params

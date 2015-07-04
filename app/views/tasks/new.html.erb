@@ -1,0 +1,45 @@
+<div class="jumbotron">
+   <div class="container">
+      		<h2><%= @project.title %></h2>
+			<h4><%= @project.text %></h4>
+    </div>
+  </div>
+
+<div class="row">
+	       <div class="col-lg-2">
+	            <ul class="nav nav-pills nav-stacked">
+                <li><%= link_to 'Home', project_path(:id => @project.id) %></li>
+                <li><%= link_to 'Profile', user_path(:id => @project.user_id) %></li>
+                <li><%= link_to 'Add new task', new_project_task_path(:project_id => @project.id) %></li>
+                <li><%= link_to 'Sprint', project_sprint_index_path(:project_id => @project.id) %></li>
+                <li><%= link_to 'Last Sprint', project_sprint_path(:project_id => @project.id, :id => @project.id), method: :get %></li>
+              </ul>
+       		</div>
+
+	<div class="col-md-8">
+		<div class="container">
+			<h4>Add a Task:</h4>
+			<!-- <form role="form"> -->
+			<%= form_for @task, url: project_tasks_path(project_id: @project.id) do |f| %>
+			  <div class="form-group">
+			    <%= f.label :text %>
+			    <%= f.text_area :text, class: "form-control"%>
+			  </div>
+		   <div class="form-group">
+		      <%= f.label :Points %>
+		      <%= f.text_field :points, class: "form-control"%>
+		    </div>
+			  <div class="form-group">
+			  <%= f.label :Developer %>
+			  <%= collection_select(:user, :name, @user, :id, :name, {:prompt => true}, {class: "form-control"}) %>
+			  </div>
+			  <div class="form-group">
+			  <%= f.label :Sprint %>
+			  <%= select_tag "sprints", options_for_select(@options), class: "form-control" %>
+			  </div>
+			  <%= f.submit class: "btn"%>
+			<% end %>
+			<!-- </form> -->
+		</div>
+	</div>
+</div>

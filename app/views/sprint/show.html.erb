@@ -12,19 +12,23 @@
 		            <li><%= link_to 'Add new task', new_project_task_path(:project_id => @project.id) %></li>
 		            <li><%= link_to 'Sprint', project_sprint_index_path(:project_id => @project.id) %></li>
 		            <li><%= link_to 'Last Sprint', project_sprint_path(:project_id => @project.id), method: :get %></li>
+
 	            </ul>
        		</div>
        <div class="col-md-8">
+       		  <h3>Details of Last Sprint : <%= @project.current_sprint-1 %></h3>
+			  <h4>Total Assigned Points : <%=@prev_task.sum(:points)%></h4>
+			  <h4>Completed Points : <%=@prev_comp.sum(:points)%></h4>
+
+
 			  <% if @project.tasks.count != 0 %>
-				<h3>List of Tasks</h3>
+				<h3>List of Completed Tasks</h3>
 				<table class="table table-bordered">
 					<th> Task </th>
-					<th> Assigned to </th>
 					<th> Points </th>
-					<% @project.tasks.each do |task| %>
+					<% @prev_comp.each do |task| %>
 					    <tr>
 					    <td><%= task.text %></td>
-					    <td><%= task.user.name %></td>
 					    <% if task.points!= nil %>
 					    	<td><%= task.points %></td>
 					    <%else%>
@@ -33,7 +37,25 @@
 					    </tr>
 					<% end %>
 				</table>
-				<% end %>
+			   <% end %>
+
+			   <% if @project.tasks.count != 0 %>
+				<h3>List of Pending Tasks</h3>
+				<table class="table table-bordered">
+					<th> Task </th>
+					<th> Points </th>
+					<% @prev_incomp.each do |task| %>
+					    <tr>
+					    <td><%= task.text %></td>
+					    <% if task.points!= nil %>
+					    	<td><%= task.points %></td>
+					    <%else%>
+					    	<td><%= 0 %></td>
+					    <%end%>
+					    </tr>
+					<% end %>
+				</table>
+			   <% end %>
        </div>
     </div>
 </div>
