@@ -21,6 +21,7 @@
 					<th> Task </th>
 					<th> Assigned to </th>
 					<th> Points </th>
+					<th> Sprints </th>
 					<% @project.tasks.each do |task| %>
 					    <tr>
 					    <td><%= task.text %></td>
@@ -30,6 +31,7 @@
 					    <%else%>
 					    	<td><%= 0 %></td>
 					    <%end%>
+					    <td><%= task.sprints %>
 					    </tr>
 					<% end %>
 				</table>
